@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import RoomForm from './RoomForm';
+import ReservationForm from './ReservationForm';
+// eslint-disable-line semi
 
 export default class Hotel extends Component {
   state = {
@@ -12,7 +14,12 @@ export default class Hotel extends Component {
     beds: '',
     bathtub: false,
     kitchen: false,
-    postRoomResponse: ''
+    reserver: '',
+    roomReserving: '',
+    checkIn: null,
+    checkOut: null,
+    postRoomResponse: '',
+    postResvResponse: ''
   };
 
   componentDidMount() {
@@ -21,7 +28,7 @@ export default class Hotel extends Component {
   }
 
   // Get form input
-  handleRoomFormChange = e => {
+  handleFormChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -37,7 +44,7 @@ export default class Hotel extends Component {
   addRoom = async e => {
     e.preventDefault();
     try {
-      const body = {
+      const roomBody = {
         price: this.state.price,
         name: this.state.name,
         number: this.state.number,
@@ -45,16 +52,16 @@ export default class Hotel extends Component {
         bathtub: this.state.bathtub,
         kitchen: this.state.kitchen
       };
-      console.log('BODY', body);
+      console.log('ROOM BODY: ', roomBody);
       const postRoom = await fetch(`http://localhost:7001/api/rest/room`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(roomBody)
       });
       const response = await postRoom.json();
-      console.log('RESP', response);
+      console.log('ROOM RESPONSE', response);
 
       // Success message
       this.setState({ postRoomResponse: response.msg });
@@ -65,6 +72,39 @@ export default class Hotel extends Component {
       console.log('Error occurred in posting room data.');
       console.log('ERROR:', error);
     }
+  };
+
+  addReservation = e => {
+    e.preventDefault();
+    const reservationBody = {
+      reserver: this.state.reserver,
+      roomReserving: this.state.roomReserving,
+      checkIn: this.state.checkIn,
+      checkOut: this.state.checkOut
+    };
+    console.log('RESERVATION BODY: ', reservationBody);
+      fetch(`http://localhost:7001/api/rest/reservation`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reservationBody)
+      }
+      )
+        .then(response => response.json())
+        .then(data => {
+          console.log('RESV RESPONSE: ', data);
+          // Success message
+          this.setState({ postResvResponse: data.msg });
+          setTimeout(() => {
+            this.setState({ postResvResponse: '' });
+          }, 3000);
+        })
+        .catch(err => {
+          console.log('ERROR', err)
+        })
+      
   };
 
   // Async await example
@@ -98,11 +138,17 @@ export default class Hotel extends Component {
     return (
       <div>
         <RoomForm
-          onChange={this.handleRoomFormChange}
+          onChange={this.handleFormChange}
           checkboxChange={this.handleCheckboxChange}
           addRoom={this.addRoom}
         />
         <h3>{this.state.postRoomResponse}</h3>
+        <ReservationForm
+          onChange={this.handleFormChange}
+          dateChange={this.handleFormChange}
+          addReservation={this.addReservation}
+        />
+        <h3>{this.state.postResvResponse}</h3>
       </div>
     );
   }
