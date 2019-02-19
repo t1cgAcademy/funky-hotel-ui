@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Hotel from './components/Hotel';
+
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
