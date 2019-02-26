@@ -13,6 +13,7 @@ import UpdateRooms from './components/Room/UpdateRooms';
 import DeleteRooms from './components/Room/DeleteRooms';
 import Home from './components/Home';
 import NavBar from './components/NavBar/NavBar';
+import GraphQL from './components/GraphQL/GraphQL';
 
 const ErrorRoute = () => <h1>Page Not Found...</h1>;
 
@@ -46,6 +47,9 @@ class App extends Component {
               path="/deleteReservations"
               component={DeleteReservations}
             />
+
+            <Route exact path="/graphql" component={GraphQL} />
+
             <Route component={ErrorRoute} />
           </Switch>
         </div>

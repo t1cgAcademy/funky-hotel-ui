@@ -11,6 +11,15 @@ export default class GetRooms extends Component {
     this.getDataRoom();
   }
 
+  sortRoomsByPrice = () => {
+    let rooms = this.state.dataRoom;
+
+    rooms = rooms.sort((a, b) => {
+      return a.price - b.price;
+    });
+    this.setState({ dataRoom: rooms });
+  };
+
   // Promises example
   getDataRoom = () => {
     console.log('getDataRoom function call');
@@ -24,6 +33,11 @@ export default class GetRooms extends Component {
   };
 
   render() {
-    return <MapRooms dataRoom={this.state.dataRoom} />;
+    return (
+      <div>
+        <button onClick={this.sortRoomsByPrice}>Sort Rooms By Price</button>
+        <MapRooms dataRoom={this.state.dataRoom} />
+      </div>
+    );
   }
 }

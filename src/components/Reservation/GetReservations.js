@@ -11,6 +11,15 @@ export default class GetReservations extends Component {
     this.getDataReservation();
   }
 
+  sortResvsByDate = () => {
+    let resv = this.state.dataReservation;
+
+    resv = resv.sort((a, b) => {
+      return new Date(a.checkIn) - new Date(b.checkIn);
+    });
+    this.setState({ dataReservation: resv });
+  };
+
   // Promises example
   getDataReservation = () => {
     fetch(`http://localhost:7001/api/rest/reservation`)
@@ -22,6 +31,11 @@ export default class GetReservations extends Component {
   };
 
   render() {
-    return <MapReservations dataReservation={this.state.dataReservation} />;
+    return (
+      <div>
+        <button onClick={this.sortResvsByDate}>Sort Rooms By Check In</button>
+        <MapReservations dataReservation={this.state.dataReservation} />
+      </div>
+    );
   }
 }

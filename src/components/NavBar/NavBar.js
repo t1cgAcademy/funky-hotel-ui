@@ -32,7 +32,7 @@ export default class NavBar extends Component {
 
               <NavDropdown title="Reservations" id="basic-nav-dropdown">
                 <NavDropdown.Item>
-                  <Link to="/getRooms">View Reservations</Link>
+                  <Link to="/getReservations">View Reservations</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
                   <Link to="/postReservations">Add Reservations</Link>
@@ -45,6 +45,10 @@ export default class NavBar extends Component {
                   <Link to="/deleteReservations">Delete Reservations</Link>
                 </NavDropdown.Item>
               </NavDropdown>
+
+              <Navbar.Brand>
+                <Link to="/graphql">GraphQL</Link>
+              </Navbar.Brand>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
