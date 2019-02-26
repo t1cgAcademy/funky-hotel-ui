@@ -3,7 +3,6 @@ import MapRooms from './MapRooms';
 
 export default class DeleteRooms extends Component {
   state = {
-    isLoading: true,
     dataRoom: []
   };
 
@@ -17,7 +16,7 @@ export default class DeleteRooms extends Component {
       .then(response => response.json())
       .then(data => {
         console.log('getDataRoom response', data);
-        this.setState({ dataRoom: data, isLoading: false });
+        this.setState({ dataRoom: data });
       })
       .catch(err => console.log('Error occurred in fetching room data: ', err));
   };

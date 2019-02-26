@@ -4,7 +4,7 @@ import MapRooms from './MapRooms';
 export default class UpdateRooms extends Component {
   state = {
     dataRoom: [],
-    isLoading: true,
+
     modalContent: {
       id: '',
       price: undefined,
@@ -42,7 +42,7 @@ export default class UpdateRooms extends Component {
       .then(response => response.json())
       .then(data => {
         console.log('getDataRoom response', data);
-        this.setState({ dataRoom: data, isLoading: false });
+        this.setState({ dataRoom: data });
       })
       .catch(err => console.log('Error occurred in fetching room data.'));
   };

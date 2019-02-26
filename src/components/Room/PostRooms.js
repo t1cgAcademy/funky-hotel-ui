@@ -71,7 +71,7 @@ export default class PostRooms extends Component {
     try {
       const api_call = await fetch(`http://localhost:7001/api/rest/room`);
       const data = await api_call.json();
-      this.setState({ dataRoom: data, isLoading: false });
+      this.setState({ dataRoom: data });
     } catch (error) {
       console.log('Error occurred in fetching room data.');
       console.log('ERROR:', error);

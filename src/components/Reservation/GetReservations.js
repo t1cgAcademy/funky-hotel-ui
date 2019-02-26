@@ -3,7 +3,6 @@ import MapReservations from './MapReservations';
 
 export default class GetReservations extends Component {
   state = {
-    isLoading: true,
     dataReservation: []
   };
 
@@ -24,7 +23,7 @@ export default class GetReservations extends Component {
   getDataReservation = () => {
     fetch(`http://localhost:7001/api/rest/reservation`)
       .then(response => response.json())
-      .then(data => this.setState({ dataReservation: data, isLoading: false }))
+      .then(data => this.setState({ dataReservation: data }))
       .catch(err =>
         console.log('Error occurred in fetching reservation data.')
       );
