@@ -12,54 +12,17 @@ export default class PostReservations extends Component {
   };
 
   // Get form input
-  handleFormChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
+  handleFormChange = e => {};
 
   // Get checkbox input
-  handleCheckboxChange = e => {
-    this.setState({
-      [e.target.name]: !this.state[e.target.name]
-    });
-  };
+  handleCheckboxChange = e => {};
 
+  // Post reservation function
   addReservation = e => {
     e.preventDefault();
-    const reservationBody = {
-      reserver: this.state.reserver,
-      roomReserving: this.state.roomReserving,
-      checkIn: this.state.checkIn,
-      checkOut: this.state.checkOut
-    };
-    console.log('RESERVATION BODY: ', reservationBody);
-    fetch(`http://localhost:7001/api/rest/reservation`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(reservationBody)
-    })
-      .then(response => response.json())
-      .then(response => {
-        console.log('RESV RESPONSE: ', response);
-        if (response.errors) {
-          // Error message
-          this.setState({ errors: response.errors });
-        } else {
-          this.setState({ errors: {} });
-        }
 
-        // Success message
-        this.setState({ postResvResponse: response.msg });
-        setTimeout(() => {
-          this.setState({ postResvResponse: '' });
-        }, 5000);
-      })
-      .catch(err => {
-        console.log('ERROR', err);
-      });
+    // Set each object key equal to state
+    const reservationBody = {};
   };
 
   render() {

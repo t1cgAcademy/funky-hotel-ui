@@ -4,7 +4,6 @@ import MapRooms from './MapRooms';
 export default class UpdateRooms extends Component {
   state = {
     dataRoom: [],
-    isLoading: true,
     modalContent: {
       id: '',
       price: undefined,
@@ -35,56 +34,15 @@ export default class UpdateRooms extends Component {
     this.setState({ modalContent: modalContent });
   };
 
-  // Promises example
+  // Fetch rooms
   getDataRoom = () => {
     console.log('getDataRoom function called');
-    fetch(`http://localhost:7001/api/rest/room`)
-      .then(response => response.json())
-      .then(data => {
-        console.log('getDataRoom response', data);
-        this.setState({ dataRoom: data, isLoading: false });
-      })
-      .catch(err => console.log('Error occurred in fetching room data.'));
   };
 
+  // Patch room function
   updateRoom = () => {
-    const roomBody = {
-      id: this.state.modalContent.id,
-      price: this.state.modalContent.price,
-      name: this.state.modalContent.name,
-      number: this.state.modalContent.number,
-      bed: this.state.modalContent.beds,
-      bathtub: this.state.modalContent.bathtub,
-      kitchen: this.state.modalContent.kitchen
-    };
-    console.log('Room body: ', roomBody);
-    fetch(`http://localhost:7001/api/rest/room`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(roomBody)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('ROOM RESPONSE: ', data);
-
-        // Check for errors and display them
-        if (data.errors) {
-          this.setState({ errors: data.errors });
-        } else {
-          this.setState({ errors: {} });
-        }
-
-        // Success message
-        this.setState({ postRoomResponse: data.msg });
-        setTimeout(() => {
-          this.setState({ postRoomResponse: '' });
-        }, 5000);
-      })
-      .catch(err => {
-        console.log('ERROR:', err);
-      });
+    // Set each object key equal to state
+    const roomBody = {};
   };
 
   handleShow = e => {

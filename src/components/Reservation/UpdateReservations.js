@@ -3,7 +3,6 @@ import MapReservations from './MapReservations';
 
 export default class UpdateReservations extends Component {
   state = {
-    isLoading: true,
     dataReservation: [],
     modalContent: {
       id: '',
@@ -25,52 +24,13 @@ export default class UpdateReservations extends Component {
     this.setState({ modalContent: modalContent });
   };
 
-  // Promises example
-  getDataReservation = () => {
-    fetch(`http://localhost:7001/api/rest/reservation`)
-      .then(response => response.json())
-      .then(data => this.setState({ dataReservation: data, isLoading: false }))
-      .catch(err =>
-        console.log('Error occurred in fetching reservation data.')
-      );
-  };
+  // Fetch Reservations
+  getDataReservation = () => {};
 
+  // Patch room function
   updateReservation = () => {
-    const reservationBody = {
-      id: this.state.modalContent.id,
-      reserver: this.state.modalContent.reserver,
-      roomReserving: this.state.modalContent.roomReserving,
-      checkIn: this.state.modalContent.checkIn,
-      checkOut: this.state.modalContent.checkOut
-    };
-    console.log('RESERVATION BODY: ', reservationBody);
-    fetch(`http://localhost:7001/api/rest/reservation`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(reservationBody)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('RESV RESPONSE: ', data);
-
-        // Check for errors and display them
-        if (data.errors) {
-          this.setState({ errors: data.errors });
-        } else {
-          this.setState({ errors: {} });
-        }
-
-        // Success message
-        this.setState({ postResvResponse: data.msg });
-        setTimeout(() => {
-          this.setState({ postResvResponse: '' });
-        }, 5000);
-      })
-      .catch(err => {
-        console.log('ERROR', err);
-      });
+    // Set each object key equal to state
+    const reservationBody = {};
   };
 
   handleShow = e => {

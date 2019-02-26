@@ -3,7 +3,6 @@ import MapRooms from './MapRooms';
 
 export default class GetRooms extends Component {
   state = {
-    isLoading: true,
     dataRoom: []
   };
 
@@ -11,26 +10,11 @@ export default class GetRooms extends Component {
     this.getDataRoom();
   }
 
-  sortRoomsByPrice = () => {
-    let rooms = this.state.dataRoom;
+  // Sort rooms by price
+  sortRoomsByPrice = () => {};
 
-    rooms = rooms.sort((a, b) => {
-      return a.price - b.price;
-    });
-    this.setState({ dataRoom: rooms });
-  };
-
-  // Promises example
-  getDataRoom = () => {
-    console.log('getDataRoom function call');
-    fetch(`http://localhost:7001/api/rest/room`)
-      .then(response => response.json())
-      .then(data => {
-        console.log('getDataRoom response', data);
-        this.setState({ dataRoom: data, isLoading: false });
-      })
-      .catch(err => console.log('Error occurred in fetching room data.'));
-  };
+  // Fetch rooms
+  getDataRoom = () => {};
 
   render() {
     return (

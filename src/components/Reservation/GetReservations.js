@@ -3,7 +3,6 @@ import MapReservations from './MapReservations';
 
 export default class GetReservations extends Component {
   state = {
-    isLoading: true,
     dataReservation: []
   };
 
@@ -11,24 +10,11 @@ export default class GetReservations extends Component {
     this.getDataReservation();
   }
 
-  sortResvsByDate = () => {
-    let resv = this.state.dataReservation;
+  // Sort reservations by date here
+  sortResvsByDate = () => {};
 
-    resv = resv.sort((a, b) => {
-      return new Date(a.checkIn) - new Date(b.checkIn);
-    });
-    this.setState({ dataReservation: resv });
-  };
-
-  // Promises example
-  getDataReservation = () => {
-    fetch(`http://localhost:7001/api/rest/reservation`)
-      .then(response => response.json())
-      .then(data => this.setState({ dataReservation: data, isLoading: false }))
-      .catch(err =>
-        console.log('Error occurred in fetching reservation data.')
-      );
-  };
+  // Fetch reservations
+  getDataReservation = () => {};
 
   render() {
     return (
