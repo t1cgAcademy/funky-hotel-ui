@@ -52,6 +52,9 @@ const RoomForm = props => {
         <div>
           <button type="submit">Add Room</button>
         </div>
+        {props.errors.msg ? (
+          <div style={{ color: 'red' }}>{props.errors.msg}</div>
+        ) : null}
       </form>
     </div>
   );

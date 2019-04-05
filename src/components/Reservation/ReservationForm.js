@@ -35,6 +35,7 @@ export default function ReservationForm(props) {
         <div>
           <button type="submit">Add Reservation</button>
         </div>
+        {props.errors.msg ? <div>{props.errors.msg}</div> : null}
       </form>
     </div>
   );
